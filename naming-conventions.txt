@@ -1,0 +1,5 @@
+Plugin Name -- Google Analytics tracking for Caldera Forms
+Text domain -- cf-ga
+Function prefix -- cf_ga
+Class prefix - CF_GA
+Filter Prefix -- cf_ga
