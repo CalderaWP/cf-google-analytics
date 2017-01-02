@@ -1,7 +1,2 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: josh
- * Date: 12/31/16
- * Time: 12:30 AM
- */
+echo Caldera_Forms_Processor_UI::config_fields( cf_ga_fields_events() );

@@ -392,6 +392,7 @@ class CF_GA_API{
 
         return $this;
     }
+
 }
 
 

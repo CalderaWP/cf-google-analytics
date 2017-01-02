@@ -1,5 +1,6 @@
 <?php
 add_action( 'plugins_loaded', function(){
+	include_once  CF_GA_PATH . '/inclues/functions.php';
     add_action( 'caldera_forms_pre_load_processors', function(){
         $config = array(
             'name' => __( 'Google Analytics Events', 'cf-ga' ),
@@ -12,6 +13,16 @@ add_action( 'plugins_loaded', function(){
 
         new CF_GA_Events( $config, cf_ga_fields_events(), 'ga-events' );
 
+		$config = array(
+			'name' => __( 'Google Analytics eCommerce Tracking', 'cf-ga' ),
+			'description' => __( 'Send eCommerce Tracking on form submission', 'cf-ga' ),
+			'author' => 'Caldera Labs',
+			'template' => CF_GA_PATH . '/includes/ecommerce-config.php',
+			'version' => '1.4.7',
+			'single' => true,
+		);
+
+	    new CF_GA_ECommerce( $config, cf_ga_ecommerce_fields(), 'ga-ecommerce' );
 
     });
 
@@ -33,61 +44,4 @@ add_action( 'plugins_loaded', function(){
 
 });
 
-function cf_ga_fields_events(){
-    return array(
-        array(
-            'id' => 'form-load-event-category',
-            'label' => __( 'Form Load Event: Category', 'cf-ga' ),
-            'desc' => __( 'Required to send a form load event', 'cf-ga' ),
-            'magic' => true,
-            'required' => false,
-        ),
-        array(
-            'id' => 'form-load-event-action',
-            'label' => __( 'Form Load Event: Action', 'cf-ga' ),
-            'desc' => __( 'Required to send a form load event', 'cf-ga' ),
-            'magic' => true,
-            'required' => false,
-        ),
-        array(
-            'id' => 'form-load-event-label',
-            'label' => __( 'Form Load Event: Category', 'cf-ga' ),
-            'magic' => true,
-            'required' => false,
-        ),
-        array(
-            'id' => 'form-load-event-value',
-            'label' => __( 'Form Load Event: Category', 'cf-ga' ),
-            'magic' => true,
-            'required' => false,
-        ),
-        array(
-            'id' => 'form-submit-event-category',
-            'label' => __( 'Form Submit Event: Category', 'cf-ga' ),
-            'desc' => __( 'Required to send a form submit event', 'cf-ga' ),
-            'magic' => true,
-            'required' => false,
-        ),
-        array(
-            'id' => 'form-submit-event-action',
-            'label' => __( 'Form Submit Event: Action', 'cf-ga' ),
-            'desc' => __( 'Required to send a form submit event', 'cf-ga' ),
-            'magic' => true,
-            'required' => false,
-        ),
-        array(
-            'id' => 'form-submit-event-label',
-            'label' => __( 'Form Submit Event: Category', 'cf-ga' ),
-            'magic' => true,
-            'required' => false,
-        ),
-        array(
-            'id' => 'form-submit-event-value',
-            'label' => __( 'Form Submit Event: Category', 'cf-ga' ),
-            'magic' => true,
-            'required' => false,
-        ),
 
-
-    );
-}
