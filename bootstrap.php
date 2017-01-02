@@ -1,6 +1,6 @@
 <?php
 add_action( 'plugins_loaded', function(){
-	include_once  CF_GA_PATH . '/inclues/functions.php';
+	include_once  CF_GA_PATH . '/includes/functions.php';
     add_action( 'caldera_forms_pre_load_processors', function(){
         $config = array(
             'name' => __( 'Google Analytics Events', 'cf-ga' ),
