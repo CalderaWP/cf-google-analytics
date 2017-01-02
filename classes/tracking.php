@@ -14,7 +14,7 @@ class CF_GA_Tracking{
 	 * @return CF_GA_API
 	 */
 	public static function default_instance(){
-		if( null == self::$instances[ 'default'  ] ){
+		if( empty( self::$instances[ 'default'  ] ) ){
 			self::$instances[ 'default'  ] = self::factory( CF_GA_Settings::get_ua(), CF_GA_Settings::get_domain() );
 		}
 
