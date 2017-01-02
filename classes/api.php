@@ -3,6 +3,7 @@
  * Simple Server Side Analytics
  *
  * Adapted from Dan Cameron's ssga class. Thanks Dan, much GPL, very share.
+ * https://github.com/dancameron/server-side-google-analytics
  */
 class CF_GA_API{
 

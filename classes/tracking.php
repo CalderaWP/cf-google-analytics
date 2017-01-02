@@ -1,19 +1,34 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: josh
- * Date: 12/31/16
- * Time: 12:32 AM
- */
+
 class CF_GA_Tracking{
 
 
     private static $instances = array();
 
+	/**
+	 * Get the API instance based on saved settings
+	 *
+	 * @since 0.0.1
+	 *
+	 * @return CF_GA_API
+	 */
+	public static function default_instance(){
+		if( null == self::$instances[ 'default'  ] ){
+			self::$instances[ 'default'  ] = self::factory( CF_GA_Settings::get_ua(), CF_GA_Settings::get_domain() );
+		}
+
+		return self::$instances[ 'default' ];
+	}
+
     /**
-     * @param $ua
-     * @param null $domain
+     * Get an API instance, possibly from cache
+     *
+     * @since 0.0.1
+     *
+     * @param string $ua UA code for property
+     * @param null|string $domain Optional. Domain name. Defaults to home_url()
+     *
      * @return CF_GA_API
      */
     public static function get_instance(  $ua, $domain = null ){
@@ -29,8 +44,18 @@ class CF_GA_Tracking{
         return self::$instances[ $key ];
     }
 
-    protected static function factory( $ua, $domain  ){
-        new CF_GA_API( $ua, $domain );
+	/**
+	 * Create API instance
+	 *
+	 * @since 0.0.1
+	 *
+	 * @param string $ua UA code for property
+	 * @param null|string $domain Optional. Domain name. Defaults to home_url()
+	 *
+	 * @return CF_GA_API
+	*/
+	protected static function factory( $ua, $domain  ){
+        return new CF_GA_API( $ua, $domain );
     }
 
 }
