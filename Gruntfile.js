@@ -108,7 +108,7 @@ module.exports = function (grunt) {
                     to: "Version: <%= pkg.version %>"
                 }, {
                     from: /define\(\s*'CF_GA_VER',\s*'(.*)'\s*\);/,
-                    to: "define( 'CF_EDD_VER', '<%= pkg.version %>' );"
+                    to: "define( 'CF_GA_VER', '<%= pkg.version %>' );"
                 }]
             }
         }
