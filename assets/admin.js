@@ -46,8 +46,8 @@ function CFGA( config, $ ){
                         xhr.setRequestHeader( 'X-WP-Nonce', config.nonce );
                     },
                     data: {
-                        ua: domain,
-                        domain: ua
+                        ua: ua,
+                        domain: domain
                     },
                     complete: function (r) {
                         self.setSettings( r.responseJSON );
