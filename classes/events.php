@@ -48,14 +48,14 @@ class CF_GA_Events extends CF_GA_Processor {
     public function load_event( $form ){
         $processor = Caldera_Forms::get_processor_by_type( $this->slug, $form );
         if( is_array( $processor ) ){
-            $category = $this->data_object->get_value( 'form-load-event-category' );
-            $action = $this->data_object->get_value( 'form-load-event-action' );
-            if( is_string( $category ) && is_string( $action ) ){
+            $category = trim( $this->data_object->get_value( 'form-load-event-category' ) );
+            $action   = trim( $this->data_object->get_value( 'form-load-event-action' ) );
+            if ( true === is_string( $category ) && true === is_string( $action ) && ! empty( $category ) && ! empty( $action ) ) {
                 $this->get_api()->set_event(
                     $category,
                     $action,
-                    $this->data_object->get_value( 'form-load-event-label' ),
-                    $this->data_object->get_value( 'form-load-event-value' )
+                    trim( $this->data_object->get_value( 'form-load-event-label' ) ),
+                    trim( this->data_object->get_value( 'form-load-event-value' ) )
                 );
             }
         }
@@ -68,14 +68,14 @@ class CF_GA_Events extends CF_GA_Processor {
     }
 
     protected function submit_event(){
-        $category = $this->data_object->get_value( 'form-submit-event-category' );
-        $action = $this->data_object->get_value( 'form-submit-event-action' );
-        if( is_string( $category ) && is_string( $action ) ){
+        $category = trim( $this->data_object->get_value( 'form-submit-event-category' ) );
+        $action   = trim( $this->data_object->get_value( 'form-submit-event-action' ) );
+        if ( true === is_string( $category ) && true === is_string( $action ) && ! empty( $category ) && ! empty( $action ) ) {
             $this->get_api()->set_event(
                 $category,
                 $action,
-                $this->data_object->get_value( 'form-submit-event-label' ),
-                $this->data_object->get_value( 'form-submit-event-value' )
+                trim( $this->data_object->get_value( 'form-submit-event-label' ) ),
+                trim( $this->data_object->get_value( 'form-submit-event-value' ) )
             );
         }
     }
