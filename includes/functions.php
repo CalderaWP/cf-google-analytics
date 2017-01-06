@@ -16,14 +16,14 @@ function cf_ga_fields_events(){
 			'label' => __( 'Form Load Event: Category', 'cf-ga' ),
 			'desc' => __( 'Required to send a form load event', 'cf-ga' ),
 			'magic' => true,
-			'required' => true,
+			'required' => false,
 		),
 		array(
 			'id' => 'form-load-event-action',
 			'label' => __( 'Form Load Event: Action', 'cf-ga' ),
 			'desc' => __( 'Required to send a form load event', 'cf-ga' ),
 			'magic' => true,
-			'required' => true,
+			'required' => false,
 		),
 		array(
 			'id' => 'form-load-event-label',
@@ -42,14 +42,14 @@ function cf_ga_fields_events(){
 			'label' => __( 'Form Submit Event: Category', 'cf-ga' ),
 			'desc' => __( 'Required to send a form submit event', 'cf-ga' ),
 			'magic' => true,
-			'required' => true,
+			'required' => false,
 		),
 		array(
 			'id' => 'form-submit-event-action',
 			'label' => __( 'Form Submit Event: Action', 'cf-ga' ),
 			'desc' => __( 'Required to send a form submit event', 'cf-ga' ),
 			'magic' => true,
-			'required' => true,
+			'required' => false,
 		),
 		array(
 			'id' => 'form-submit-event-label',
