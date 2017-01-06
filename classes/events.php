@@ -55,7 +55,7 @@ class CF_GA_Events extends CF_GA_Processor {
                     $category,
                     $action,
                     trim( $this->data_object->get_value( 'form-load-event-label' ) ),
-                    trim( this->data_object->get_value( 'form-load-event-value' ) )
+                    trim( $this->data_object->get_value( 'form-load-event-value' ) )
                 );
             }
         }
