@@ -12,7 +12,6 @@ class CF_GA_Events extends CF_GA_Processor {
      */
     public function __construct(array $processor_config, array $fields, $slug){
         parent::__construct($processor_config, $fields, $slug);
-        add_action( 'caldera_forms_render_start', array( $this, 'maybe_send_start' ) );
         add_action( 'caldera_forms_submit_complete', array( $this, 'send' ) );
     }
 
@@ -45,18 +44,24 @@ class CF_GA_Events extends CF_GA_Processor {
      *
      * @param $form
      */
-    public function load_event( $form ){
-        $processor = Caldera_Forms::get_processor_by_type( $this->slug, $form );
-        if( is_array( $processor ) ){
-            $category = trim( $this->data_object->get_value( 'form-load-event-category' ) );
-            $action   = trim( $this->data_object->get_value( 'form-load-event-action' ) );
-            if ( true === is_string( $category ) && true === is_string( $action ) && ! empty( $category ) && ! empty( $action ) ) {
-                $this->get_api()->set_event(
-                    $category,
-                    $action,
-                    trim( $this->data_object->get_value( 'form-load-event-label' ) ),
-                    trim( $this->data_object->get_value( 'form-load-event-value' ) )
-                );
+    public static function load_event( $form ){
+        $processors = Caldera_Forms::get_processor_by_type( 'ga-events', $form );
+        foreach ( $processors as $key => $processor ) {
+            if ( is_array( $processor ) && $key === $processor['ID'] && array_key_exists( 'runtimes', $processor ) ) {
+                $data = new Caldera_Forms_Processor_Get_Data( $processor['config'], $form, cf_ga_fields_events() );
+                $category = trim( $data->get_value( 'form-load-event-category') );
+                $action   = trim( $data->get_value( 'form-load-event-action') );
+                if ( true === is_string( $category ) && true === is_string( $action ) && ! empty( $category ) && ! empty( $action ) ) {
+                    $api = CF_GA_Tracking::default_instance();
+                    $api->set_event(
+                        $category,
+                        $action,
+                        trim( $data->get_value( 'form-load-event-label' ) ),
+                        trim( $data->get_value( 'form-load-event-value' ) )
+                    );
+                    $api->send();
+                    $api->reset();
+                }
             }
         }
     }
