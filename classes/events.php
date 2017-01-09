@@ -46,21 +46,23 @@ class CF_GA_Events extends CF_GA_Processor {
      */
     public static function load_event( $form ){
         $processors = Caldera_Forms::get_processor_by_type( 'ga-events', $form );
-        foreach ( $processors as $key => $processor ) {
-            if ( is_array( $processor ) && $key === $processor['ID'] && array_key_exists( 'runtimes', $processor ) ) {
-                $data = new Caldera_Forms_Processor_Get_Data( $processor['config'], $form, cf_ga_fields_events() );
-                $category = trim( $data->get_value( 'form-load-event-category') );
-                $action   = trim( $data->get_value( 'form-load-event-action') );
-                if ( true === is_string( $category ) && true === is_string( $action ) && ! empty( $category ) && ! empty( $action ) ) {
-                    $api = CF_GA_Tracking::default_instance();
-                    $api->set_event(
-                        $category,
-                        $action,
-                        trim( $data->get_value( 'form-load-event-label' ) ),
-                        trim( $data->get_value( 'form-load-event-value' ) )
-                    );
-                    $api->send();
-                    $api->reset();
+        if ( false !== $processors && is_array( $processors ) ) {
+            foreach ( $processors as $key => $processor ) {
+                if ( is_array( $processor ) && $key === $processor['ID'] && array_key_exists( 'runtimes', $processor ) ) {
+                    $data = new Caldera_Forms_Processor_Get_Data( $processor['config'], $form, cf_ga_fields_events() );
+                    $category = trim( $data->get_value( 'form-load-event-category') );
+                    $action   = trim( $data->get_value( 'form-load-event-action') );
+                    if ( true === is_string( $category ) && true === is_string( $action ) && ! empty( $category ) && ! empty( $action ) ) {
+                        $api = CF_GA_Tracking::default_instance();
+                        $api->set_event(
+                            $category,
+                            $action,
+                            trim( $data->get_value( 'form-load-event-label' ) ),
+                            trim( $data->get_value( 'form-load-event-value' ) )
+                        );
+                        $api->send();
+                        $api->reset();
+                    }
                 }
             }
         }

@@ -1,27 +1,6 @@
 <?php
 add_action( 'plugins_loaded', function(){
 	include_once  CF_GA_PATH . '/includes/functions.php';
-
-	function cf_ga_get_events_config(){
-		return array(
-            'name' => __( 'Google Analytics Events', 'cf-ga' ),
-            'description' => __( 'Trigger events on form load and submit', 'cf-ga' ),
-            'author' => 'Caldera Labs',
-            'template' => CF_GA_PATH . '/includes/event-config.php',
-            'version' => '1.4.7',
-            'single' => false,
-        );
-	}
-	function cf_ga_get_ecommerce_config(){
-		return array(
-			'name' => __( 'Google Analytics eCommerce Tracking', 'cf-ga' ),
-			'description' => __( 'Send eCommerce Tracking on form submission', 'cf-ga' ),
-			'author' => 'Caldera Labs',
-			'template' => CF_GA_PATH . '/includes/ecommerce-config.php',
-			'version' => '1.4.7',
-			'single' => true,
-		);
-	}
     add_action( 'caldera_forms_pre_load_processors', function(){
         
         new CF_GA_Events( cf_ga_get_events_config(), cf_ga_fields_events(), 'ga-events' );
@@ -47,4 +26,38 @@ add_action( 'plugins_loaded', function(){
 	add_action( 'caldera_forms_render_start', array( 'CF_GA_Events', 'load_event' ) );
 });
 
+/**
+ * Config for GA Events Processor
+ *
+ * @since 0.0.1
+ *
+ * @return array
+ */
+function cf_ga_get_events_config(){
+	return array(
+        'name' => __( 'Google Analytics Events', 'cf-ga' ),
+        'description' => __( 'Trigger events on form load and submit', 'cf-ga' ),
+        'author' => 'Caldera Labs',
+        'template' => CF_GA_PATH . '/includes/event-config.php',
+        'version' => '1.4.7',
+        'single' => true,
+    );
+}
 
+/**
+* Config for GA eCommerce Processor
+ *
+ * @since 0.0.1
+ *
+ * @return array
+ */
+function cf_ga_get_ecommerce_config(){
+	return array(
+		'name' => __( 'Google Analytics eCommerce Tracking', 'cf-ga' ),
+		'description' => __( 'Send eCommerce Tracking on form submission', 'cf-ga' ),
+		'author' => 'Caldera Labs',
+		'template' => CF_GA_PATH . '/includes/ecommerce-config.php',
+		'version' => '1.4.7',
+		'single' => true,
+	);
+}
