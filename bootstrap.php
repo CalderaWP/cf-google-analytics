@@ -16,7 +16,7 @@ add_action( 'plugins_loaded', function(){
 
 	//REST API
 	if( ! did_action( 'caldera_forms_rest_api_init' ) ){
-		add_action( 'rest_api_init', [ 'Caldera_Forms', 'init_rest_api' ], 25 );
+		add_action( 'rest_api_init', array('Caldera_Forms', 'init_rest_api'), 25 );
 	}
 
 	add_action( 'caldera_forms_rest_api_pre_init', function( $api ){
