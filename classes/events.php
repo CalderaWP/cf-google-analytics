@@ -20,7 +20,10 @@ class CF_GA_Events extends CF_GA_Processor {
      */
     public function pre_processor(array $config, array $form, $proccesid){
         $this->set_data_object_initial( $config, $form );
-        if( empty(  $this->data_object->get_errors() ) ){
+
+        $data_object_errors = $this->data_object->get_errors();
+
+        if( empty( $data_object_errors ) ){
             $this->submit_event();
         }else{
             return $this->data_object->get_errors();
