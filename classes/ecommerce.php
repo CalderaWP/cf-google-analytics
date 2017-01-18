@@ -20,7 +20,7 @@ class CF_GA_ECommerce extends CF_GA_Processor {
 			return $errors;
 		}
 
-		$transaction_id = $_transcation_id = $this->data_object->get_value( 'transaction-id' );
+		$transaction_id = $_transaction_id = $this->data_object->get_value( 'transaction-id' );
 
 		$this->get_api()->send_transaction( $transaction_id, $this->data_object->get_value( 'store-name' ), $this->data_object->get_value( 'total' ), $this->data_object->get_value( 'tax' ), $this->data_object->get_value( 'shipping' ), $this->data_object->get_value( 'city' ), $this->data_object->get_value( 'region' ), $this->data_object->get_value( 'country' ) );
 
@@ -41,7 +41,7 @@ class CF_GA_ECommerce extends CF_GA_Processor {
  			);
 			foreach ( $items as $item ) {
 				$sku            = $product_name = $variation = $unit_price = $quantity = false;
-				$transaction_id = $_transcation_id;
+				$transaction_id = $_transaction_id;
 				$sku            = $product_name = $variation = $unit_price = false;
 				$args           = wp_parse_args( $item, $defaults );
 				extract( $args );
