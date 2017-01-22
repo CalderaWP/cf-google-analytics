@@ -35,9 +35,9 @@ class CF_GA_ECommerce extends CF_GA_Processor {
 				'sku'            => '0',
 				'product_name'   => '',
 				'unit_price'     => '0.00',
-				'variation_id'   => '0',
+				'variation'      => '0',
 				'transaction_id' => $transaction_id,
-				'quantity' => 0,
+				'quantity'       => 0,
  			);
 			foreach ( $items as $item ) {
 				$sku            = $product_name = $variation = $unit_price = $quantity = false;
