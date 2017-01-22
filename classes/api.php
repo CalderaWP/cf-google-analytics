@@ -121,7 +121,8 @@ class CF_GA_API{
      */
     public function reset() {
         $data = array(
-            'utmac' => null,
+            'utmac' => $this->data['utmac'],
+            'utmhn' => $this->data['utmhn'],
             'utmcc' => $this->create_cookie(),
             'utmcn' => null,
             'utmcr' => null,
