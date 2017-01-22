@@ -89,7 +89,7 @@ function cf_ga_ecommerce_fields(){
 		),
 
 		array(
-			'id' => 'tax',
+			'id' => 'tax-amount',
 			'label' => __( 'Tax Amount', 'cf-ga' ),
 			'magic' => true,
 			'required' => false,

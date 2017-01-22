@@ -22,7 +22,7 @@ class CF_GA_ECommerce extends CF_GA_Processor {
 
 		$transaction_id = $_transaction_id = $this->data_object->get_value( 'transaction-id' );
 
-		$this->get_api()->send_transaction( $transaction_id, $this->data_object->get_value( 'store-name' ), $this->data_object->get_value( 'total' ), $this->data_object->get_value( 'tax' ), $this->data_object->get_value( 'shipping' ), $this->data_object->get_value( 'city' ), $this->data_object->get_value( 'region' ), $this->data_object->get_value( 'country' ) );
+		$this->get_api()->send_transaction( $transaction_id, $this->data_object->get_value( 'store-name' ), $this->data_object->get_value( 'total' ), $this->data_object->get_value( 'tax-amount' ), $this->data_object->get_value( 'shipping' ), $this->data_object->get_value( 'city' ), $this->data_object->get_value( 'region' ), $this->data_object->get_value( 'country' ) );
 
 		/**
 		 * Add items to Google Analytics eCommerce tracking
