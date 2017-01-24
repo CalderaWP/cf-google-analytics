@@ -31,26 +31,48 @@ class CF_GA_ECommerce extends CF_GA_Processor {
 		 */
 		$items = apply_filters( 'cf_ga_ecommerce_items', array(), $transaction_id, $config, $form );
 		if ( ! empty( $items ) ) {
-			$defaults = array(
-				'sku'            => '0',
-				'product_name'   => '',
-				'unit_price'     => '0.00',
-				'variation'      => '0',
-				'transaction_id' => $transaction_id,
-				'quantity'       => 0,
- 			);
-			foreach ( $items as $item ) {
-				$sku            = $product_name = $variation = $unit_price = $quantity = false;
-				$transaction_id = $_transaction_id;
-				$sku            = $product_name = $variation = $unit_price = false;
-				$args           = wp_parse_args( $item, $defaults );
-				extract( $args );
-				$this->get_api()->send_item( $transaction_id, $sku, $product_name, $variation, $unit_price, $quantity );
 
+			foreach ( $items as $item ) {
+				$item['transaction_id'] = $_transaction_id;
+
+				$this->sendLineItem( $item );
 			}
 
 		}
 
+	}
+
+	private function sendLineItem( array $rawLineItemDetails ) {
+		$preparedLineItemDetails = $this->prepareLineItemDetails( $rawLineItemDetails );
+
+		$this->get_api()->send_item(
+			$preparedLineItemDetails['transaction_id'],
+			$preparedLineItemDetails['sku'],
+			$preparedLineItemDetails['product_name'],
+			$preparedLineItemDetails['variation'],
+			$preparedLineItemDetails['unit_price'],
+			$preparedLineItemDetails['quantity']
+		);
+	}
+
+	private function prepareLineItemDetails( array $unpreparedLineItemDetails ) {
+		$defaults = array(
+			'sku'            => '0',
+			'product_name'   => '',
+			'unit_price'     => '0.00',
+			'variation'      => '0',
+			'transaction_id' => '0',
+			'quantity'       => 0,
+		);
+
+		$mergedLineItemDetails = wp_parse_args( $unpreparedLineItemDetails, $defaults );
+
+		// Set the SKU equal to the product name, if the SKU wasn't set originally.
+		if ( $mergedLineItemDetails['sku'] === $defaults['sku'] && $unpreparedLineItemDetails['sku'] !== $defaults['sku'] ) {
+			$mergedLineItemDetails['sku'] = $mergedLineItemDetails['product_name'];
+		}
+
+		return $mergedLineItemDetails;
 	}
 
 
