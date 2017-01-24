@@ -33,6 +33,7 @@ class CF_GA_ECommerce extends CF_GA_Processor {
 		if ( ! empty( $items ) ) {
 
 			foreach ( $items as $item ) {
+				// Manually set the transaction ID for each line item, because it's not included by default.
 				$item['transaction_id'] = $_transaction_id;
 
 				$this->sendLineItem( $item );
@@ -42,6 +43,11 @@ class CF_GA_ECommerce extends CF_GA_Processor {
 
 	}
 
+	/**
+	 * Send a line item to the Google API, given a set of details.
+	 *
+	 * @param array $rawLineItemDetails
+	 */
 	private function sendLineItem( array $rawLineItemDetails ) {
 		$preparedLineItemDetails = $this->prepareLineItemDetails( $rawLineItemDetails );
 
@@ -55,6 +61,14 @@ class CF_GA_ECommerce extends CF_GA_Processor {
 		);
 	}
 
+	/**
+	 * Merge the raw line item details with default values, and do further
+	 * processing to ensure we can send this line item safely.
+	 *
+	 * @param array $unpreparedLineItemDetails
+	 *
+	 * @return array
+	 */
 	private function prepareLineItemDetails( array $unpreparedLineItemDetails ) {
 		$defaults = array(
 			'sku'            => '0',
