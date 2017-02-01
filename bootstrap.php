@@ -41,6 +41,7 @@ function cf_ga_get_events_config(){
         'template' => CF_GA_PATH . '/includes/event-config.php',
         'version' => '1.4.7',
         'single' => true,
+		'icon' => CF_GA_URL . '/icon.png'
     );
 }
 
@@ -59,5 +60,7 @@ function cf_ga_get_ecommerce_config(){
 		'template' => CF_GA_PATH . '/includes/ecommerce-config.php',
 		'version' => '1.4.7',
 		'single' => true,
+		'icon' => CF_GA_URL . '/icon.png'
+
 	);
 }
