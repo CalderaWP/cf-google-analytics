@@ -26,6 +26,8 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'CF_GA_PATH',  plugin_dir_path( __FILE__ ) );
 define( 'CF_GA_URL',  plugin_dir_url( __FILE__ ) );
 define( 'CF_GA_VER', '0.0.1' );
+define( 'CF_GA_CORE',  __FILE__ );
+
 
 
 /**
@@ -46,6 +48,7 @@ function cf_ga_load_or_not() {
 		}
 
 	} else {
+		include_once ( CF_GA_PATH . '/vendor/autoload.php' );
 		include_once( CF_GA_PATH . '/bootstrap.php' );
 
 	}
