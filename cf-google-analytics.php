@@ -1,7 +1,26 @@
 <?php
 /**
-Plugin Name: Caldera Forms Google Analytics
+
+ * @copyright 2017 - CalderaWP LLC - License GPL V2+
+ *
+ * @wordpress-plugin
+* Plugin Name: Caldera Forms Google Analytics
+ * Plugin URI: https://calderaforms.com/downloads/caldera-forms-google-analytics-tracking/
+ * Description: Google Analytics Tracking For Caldera Forms
+ * Version: 1.0.1
+ * Author:      Caldera Labs
+ * Author URI:  https://calderaforms.com
+ * Text Domain: cf-ga
+ * License:     GPL-2.0+
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * Domain Path: /languages
  */
+
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 
 // define constants
 define( 'CF_GA_PATH',  plugin_dir_path( __FILE__ ) );
@@ -12,8 +31,8 @@ define( 'CF_GA_VER', '0.0.1' );
 /**
  * Load the plugin if PHP version is sufficient.
  */
-add_action( 'plugins_loaded', 'cep_load_or_die', 0 );
-function cep_load_or_die() {
+add_action( 'plugins_loaded', 'cf_ga_load_or_not', 0 );
+function cf_ga_load_or_not() {
 	if ( is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 		include_once CF_GA_PATH . 'vendor/calderawp/dismissible-notice/src/functions.php';
 	}
