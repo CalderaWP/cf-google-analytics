@@ -103,7 +103,7 @@ class CF_GA_Menu {
 	<cf-ga></cf-ga>
 </div>
 <script type="text/html" id="cf-ga-tmpl">
-	<form  v-on:submit.prevent="onSubmit" v-cloack>
+	<form  v-on:submit.prevent="onSubmit" v-cloak>
 		<div class="caldera-config-group">
 			<label for="cf-ga-ua">
 				<?php esc_html_e( 'UA Code', 'cf-ga' ); ?>
