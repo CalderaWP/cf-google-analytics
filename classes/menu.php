@@ -60,7 +60,7 @@ class CF_GA_Menu {
 	 * @param $hook
 	 */
 	public function scripts( $hook ){
-		if( Caldera_Forms::PLUGIN_SLUG . '_page_'. $this->menu_slug  === $hook ){
+		if ( isset( $_GET[ 'page' ] ) && 'caldera-forms-cf-ga' == $_GET[ 'page' ] ) {
 			// CF 1.5.0+
 			if( class_exists( 'Caldera_Forms_Admin_Assets' ) ){
 				Caldera_Forms_Admin_Assets::enqueue_style( 'admin' );
