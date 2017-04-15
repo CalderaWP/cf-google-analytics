@@ -1,6 +1,6 @@
 {
   "name": "cf-google-analytics",
-  "version": "1.0.1",
+  "version": "1.0.2-b-1",
   "description": "Google analytics tracking for Caldera Forms",
   "repository": {
     "type": "git",
