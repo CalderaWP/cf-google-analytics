@@ -120,3 +120,21 @@ function cf_ga_ecommerce_fields(){
 		),
 	);
 }
+
+/**
+ * Show warning if global settings are not available.
+ *
+ * @since 1.1.0
+ */
+function cf_ga_settings_nag(){
+	$settings = CF_GA_Settings::get_settings();
+	if ( empty( $settings[ 'ua' ] ) || empty( $settings[ 'domain' ] ) ) {
+		?>
+		<div class="notice notice-error">
+			<p><?php esc_html_e( 'Before using this processor, you must set UA code and domain in the Caldera Forms Google Analytics menu.', 'cf-ga' ); ?></p>
+		</div>
+
+		<?php
+	}
+
+}

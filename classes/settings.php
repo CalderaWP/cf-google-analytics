@@ -78,7 +78,7 @@ class CF_GA_Settings {
 	 */
 	public static function save_domain( $domain ){
 		$settings = self::get_settings();
-		$settings[ 'domain' ] = esc_url( $domain );
+		$settings[ 'domain' ] = esc_url_raw( $domain );
 		update_option( self::$key, $settings );
 	}
 
