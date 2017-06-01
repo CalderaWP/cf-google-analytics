@@ -74,7 +74,10 @@ class CF_GA_Menu {
 			wp_enqueue_script( 'cf-ga', CF_GA_URL . '/assets/admin.js', array( 'jquery' ), CF_GA_VER, true );
 			wp_localize_script( 'cf-ga', 'CF_GA', array(
 				'api' => esc_url_raw( Caldera_Forms_API_Util::url( 'add-ons/cf-ga/settings' ) ),
-				'nonce' => wp_create_nonce( 'wp_rest' )
+				'nonce' => wp_create_nonce( 'wp_rest' ),
+				'strings' => array(
+					'saved' => esc_html__( 'Settings Saved', 'cf-ga' )
+				)
 			));
 
 		}
@@ -90,6 +93,16 @@ class CF_GA_Menu {
 	public function render_admin(){
 
 		?>
+<style>
+	#cf-ga-feedback {
+		display: inline-block;
+		margin-left: -12px;
+		margin-bottom: 6px;
+	}
+	#cf-ga-feedback p {
+		padding: 4px;
+	}
+</style>
 <div class="caldera-editor-header">
 	<ul class="caldera-editor-header-nav">
 		<li class="caldera-editor-logo">
@@ -104,6 +117,8 @@ class CF_GA_Menu {
 </div>
 <script type="text/html" id="cf-ga-tmpl">
 	<form  v-on:submit.prevent="onSubmit" v-cloak>
+		<div id="cf-ga-feedback"></div>
+
 		<div class="caldera-config-group">
 			<label for="cf-ga-ua">
 				<?php esc_html_e( 'UA Code', 'cf-ga' ); ?>
@@ -117,6 +132,9 @@ class CF_GA_Menu {
 			<input v-model="domain" id="cf-ga-domain"/>
 		</div>
 		<?php submit_button( esc_html__( 'Save') ); ?>
+		<div id="cf-ga-spinner" aria-hidden="true" style="display: none">
+			<img src="<?php echo esc_url( admin_url( 'images/spinner.gif' ) ); ?>" />
+		</div>
 	</form>
 </script>
 

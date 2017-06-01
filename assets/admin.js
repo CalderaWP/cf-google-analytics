@@ -39,6 +39,10 @@ function CFGA( config, $ ){
                 var self = this;
                 var ua = this.ua;
                 var domain = this.domain;
+				var $spinner = $( '#cf-ga-spinner' );
+				var $feedback = $( '#cf-ga-feedback' );
+				$spinner.show().attr( 'aria-hidden', false );
+				$feedback.html( '' );
                 $.ajax({
                     method: 'POST',
                     url: config.api,
@@ -51,7 +55,10 @@ function CFGA( config, $ ){
                     },
                     complete: function (r) {
                         self.setSettings( r.responseJSON );
-                    },
+                        $( '#cf-ga-feedback' ).html( '<p class="notice notice-success">' + CF_GA.strings.saved + '</p>' );
+						$spinner.hide().attr( 'aria-hidden', true );
+
+					},
                     error: function (r) {
                         alert('FAIL');
                     }
